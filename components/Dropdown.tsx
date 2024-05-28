@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 
 interface DropdownProps {
-    search: string;
+    locations: any;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 interface locationsType {
@@ -15,22 +17,19 @@ interface locationsType {
     longitude: number;
 }
 
-const Dropdown: React.FC<DropdownProps> = async ({ search }) => {
-    const resLocations = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${search}&count=5&language=en&format=json`);
-    const { results: locations } = await resLocations.json();
-
+const Dropdown: React.FC<DropdownProps> = ({ locations, setOpen }) => {
     return (
         locations && (
-            <div className=" bg-neutral-800 absolute w-full ">
+            <div className=" bg-neutral-800 absolute w-full rounded-b-md">
                 {locations.map(({ id, country_code, name, admin1, country, latitude, longitude }: locationsType) => {
                     let subLoc = country && admin1 ? `${country}, ${admin1}` : country ?? admin1 ?? "";
                     const src = country_code ? `https://hatscripts.github.io/circle-flags/flags/${country_code?.toLowerCase()}.svg` : "/icon.png";
 
                     return (
                         <Link
-                            href={`?latitude=${latitude}&longitude=${longitude}`}
+                            href={`?latitude=${latitude}&longitude=${longitude}&search=${""}`}
                             key={id}
-                            className="py-2 px-3 border-b border-neutral-400 hover:bg-neutral-700 active:bg-neutral-600 hover:cursor-pointer flex gap-2 items-center"
+                            className="py-2 px-3 border-t  border-neutral-400 hover:bg-neutral-700 active:bg-neutral-600 hover:cursor-pointer flex gap-2 items-center"
                         >
                             <Image
                                 alt="country flag"
