@@ -19,11 +19,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div className="h-screen">
-                    <Navbar />
-                    <div className="h-12" />
-                    <Drawer>{children}</Drawer>
-                </div>
+                <Navbar />
+                <div className="h-12" />
+                <Drawer>{children}</Drawer>
             </body>
         </html>
     );
