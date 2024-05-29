@@ -1,6 +1,6 @@
 "use client";
 
-import DrawerButtons from "@/components/DrawerButtons";
+import DrawerButtons from "@/components/drawer/DrawerButtons";
 import {
     Bars3Icon,
     BuildingLibraryIcon,
@@ -47,7 +47,7 @@ const Drawer: React.FC<DrawerProps> = ({ children }) => {
     return (
         <div className="w-full ">
             <button
-                className="text-white fixed top-0 left-0 w-12 h-12 p-3 bg-neutral-950 hover:bg-neutral-900 active:bg-neutral-800"
+                className=" fixed top-0 left-0 w-12 h-12 p-3 bg-neutral-950 hover:bg-neutral-900 active:bg-neutral-800"
                 onClick={handleClick}
             >
                 <Bars3Icon />
