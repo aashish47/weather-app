@@ -1,5 +1,6 @@
 import UnitSelector from "@/components/navbar/temperature/unitSelector";
 import { HomeModernIcon } from "@heroicons/react/24/solid";
+import { Suspense } from "react";
 
 interface TemperatureNavbarProps {
     location: string;
@@ -15,7 +16,9 @@ const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location, temp, u
                 <p className="text-lg capitalize">{location}</p>
                 <p>{`${temp}${unit}`}</p>
             </div>
-            <UnitSelector />
+            <Suspense>
+                <UnitSelector />
+            </Suspense>
         </div>
     );
 };
