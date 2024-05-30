@@ -7,6 +7,8 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
+const cache = new Map();
+
 const Search = () => {
     const pathname = usePathname();
     const router = useRouter();
@@ -31,17 +33,24 @@ const Search = () => {
 
     useEffect(() => {
         const search = async () => {
-            const response = await fetch(`/api/search?search=${searchParam}`);
-            if (response.ok) {
-                const { results } = await response.json();
-                setLocations(results);
+            if (cache.has(searchParam)) {
+                setLocations(cache.get(searchParam));
                 setOpen(true);
             } else {
-                setLocations([]);
-                setOpen(false);
+                const response = await fetch(`/api/search?search=${searchParam}`);
+                if (response.ok) {
+                    const { results } = await response.json();
+                    cache.set(searchParam, results);
+                    setLocations(results);
+                    setOpen(true);
+                } else {
+                    setLocations([]);
+                    setOpen(false);
+                }
             }
         };
         search();
+        console.log(cache);
     }, [searchParam]);
 
     return (
