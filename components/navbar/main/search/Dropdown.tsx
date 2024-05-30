@@ -1,10 +1,10 @@
-import { Location } from "@/components/navbar/main/search/Search";
+import { Geolocation } from "@/types/Geolocation";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 interface DropdownProps {
-    locations: Location[];
+    locations: Geolocation[];
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ locations }) => {

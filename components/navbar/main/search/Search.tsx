@@ -1,40 +1,18 @@
 "use client";
 
 import Dropdown from "@/components/navbar/main/search/Dropdown";
+import { Geolocation } from "@/types/Geolocation";
 import { createQueryStringCallback } from "@/utils/createQueryString";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-
-export interface Location {
-    id: number;
-    name: string;
-    latitude: number;
-    longitude: number;
-    elevation: number;
-    timezone: string;
-    feature_code: string;
-    country_code: string;
-    country: string;
-    country_id: number;
-    population: number;
-    postcodes: string[];
-    admin1: string;
-    admin2: string;
-    admin3: string;
-    admin4: string;
-    admin1_id: number;
-    admin2_id: number;
-    admin3_id: number;
-    admin4_id: number;
-}
 
 const Search = () => {
     const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
     const search = searchParams.get("search") ?? "";
-    const [locations, setLocations] = useState<Location[]>([]);
+    const [locations, setLocations] = useState<Geolocation[]>([]);
     const [open, setOpen] = useState(false);
 
     const createQueryString = useCallback(createQueryStringCallback, [searchParams]);

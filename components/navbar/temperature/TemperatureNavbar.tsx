@@ -3,14 +3,17 @@ import { HomeModernIcon } from "@heroicons/react/24/solid";
 
 interface TemperatureNavbarProps {
     location: string;
+    temp: number;
+    unit: string;
 }
 
-const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location }) => {
+const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location, temp, unit }) => {
     return (
         <div className="w-full sticky top-0 px-2 py-1 bg-gradient-to-b from-slate-900 flex justify-between items-center ">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
                 <HomeModernIcon className="w-6" />
-                <h1 className="text-lg ">{location}</h1>
+                <p className="text-lg capitalize">{location}</p>
+                <p>{`${temp}${unit}`}</p>
             </div>
             <UnitSelector />
         </div>
