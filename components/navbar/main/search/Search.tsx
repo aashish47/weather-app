@@ -11,19 +11,27 @@ const Search = () => {
     const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const search = searchParams.get("search") ?? "";
+    const searchParam = searchParams.get("search") ?? "";
     const [locations, setLocations] = useState<Geolocation[]>([]);
     const [open, setOpen] = useState(false);
+    const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | undefined>(undefined);
+    const typingDelay = 500;
 
     const createQueryString = useCallback(createQueryStringCallback, [searchParams]);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        router.push(pathname + "?" + createQueryString("search", e.target.value, searchParams));
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        clearTimeout(typingTimer);
+        const newTimer = setTimeout(searchLocations, typingDelay, event.target.value);
+        setTypingTimer(newTimer);
+    };
+
+    const searchLocations = (search: string) => {
+        router.push(pathname + "?" + createQueryString("search", search, searchParams));
     };
 
     useEffect(() => {
-        const delaySearch = setTimeout(async () => {
-            const response = await fetch(`/api/search?search=${search}`);
+        const search = async () => {
+            const response = await fetch(`/api/search?search=${searchParam}`);
             if (response.ok) {
                 const { results } = await response.json();
                 setLocations(results);
@@ -32,16 +40,15 @@ const Search = () => {
                 setLocations([]);
                 setOpen(false);
             }
-        }, 300); // 300ms debounce
-        return () => clearTimeout(delaySearch);
-    }, [search]);
+        };
+        search();
+    }, [searchParam]);
 
     return (
         <div
             onFocus={() => setOpen(true)}
             onBlur={(e) => {
                 // Check if the related target is within the dropdown
-
                 if (!e.currentTarget.contains(e.relatedTarget)) {
                     setOpen(false);
                 }
@@ -60,8 +67,7 @@ const Search = () => {
                 placeholder="Search city"
                 type="text"
                 name="search"
-                value={search ?? ""}
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
             />
             {open && <Dropdown locations={locations} />}
         </div>
