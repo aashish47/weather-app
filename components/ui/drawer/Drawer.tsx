@@ -1,6 +1,6 @@
 "use client";
 
-import DrawerButtons from "@/components/drawer/DrawerButtons";
+import DrawerButtons from "@/components/ui/drawer/DrawerButtons";
 import {
     Bars3Icon,
     BuildingLibraryIcon,

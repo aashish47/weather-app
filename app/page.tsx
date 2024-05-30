@@ -1,4 +1,4 @@
-import TemperatureNavbar from "@/components/navbar/temperature/TemperatureNavbar";
+import TemperatureNavbar from "@/components/navbar/temperature";
 
 const Home = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
     const { latitude = "28.6519", longitude = "77.2315", location = "Delhi" } = searchParams;
@@ -10,8 +10,44 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
     return (
         <div className="">
             <TemperatureNavbar location={location} />
-            {location}
-            {forecast.timezone}
+            <div className="overflow-auto h-[calc(100vh-96px)]">
+                {location}
+                {forecast.timezone}
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+                <div>aaaa</div>
+            </div>
         </div>
     );
 };

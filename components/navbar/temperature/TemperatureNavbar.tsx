@@ -1,4 +1,4 @@
-import UnitSelector from "@/components/navbar/temperature/UnitSelector";
+import UnitSelector from "@/components/navbar/temperature/unitSelector";
 import { HomeModernIcon } from "@heroicons/react/24/solid";
 
 interface TemperatureNavbarProps {

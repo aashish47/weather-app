@@ -1,4 +1,4 @@
-import Search from "@/components/navbar/main/search/Search";
+import Search from "@/components/navbar/main/search";
 
 const Navbar = () => {
     return (

@@ -1,5 +1,5 @@
-import Drawer from "@/components/drawer/Drawer";
-import Navbar from "@/components/navbar/main/Navbar";
+import Navbar from "@/components/navbar/main";
+import Drawer from "@/components/ui/drawer";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
