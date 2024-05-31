@@ -13,7 +13,7 @@ const Radio: React.FC<RadioProps> = ({ selected, labels, handleClick }) => {
                 <button
                     key={value}
                     onClick={() => handleClick(value)}
-                    className=" text-nowrap flex items-center gap-2 first:rounded-t-md last:rounded-b-md px-2 py-1 font-light last:border-t border-neutral-600 hover:bg-neutral-700 active:bg-neutral-600 capitalize"
+                    className=" text-nowrap flex items-center gap-2 first:rounded-t-md last:rounded-b-md px-3 py-2 font-light last:border-t border-neutral-600 hover:bg-neutral-700 active:bg-neutral-600 capitalize"
                 >
                     <div className={`w-3 h-3 ring border-2 rounded-full ${value === selected ? "bg-pink-400" : "bg-white"}`} />
                     {label}

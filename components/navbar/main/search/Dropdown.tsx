@@ -12,7 +12,7 @@ const Dropdown: React.FC<DropdownProps> = ({ locations }) => {
     const unit = searchParams.get("unit") ?? "c";
     return (
         locations && (
-            <div className="bg-neutral-800 absolute w-full rounded-b-md">
+            <div className="bg-neutral-800 absolute w-full rounded-b-md max-h-[50vh] overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {locations.map(({ id, country_code, name, admin1, country, latitude, longitude }) => {
                     const subLoc = country && admin1 ? `${country}, ${admin1}` : country ?? admin1 ?? "";
                     const src = country_code ? `https://hatscripts.github.io/circle-flags/flags/${country_code?.toLowerCase()}.svg` : "/icon.png";

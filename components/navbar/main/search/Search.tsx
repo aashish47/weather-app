@@ -50,7 +50,6 @@ const Search = () => {
             }
         };
         search();
-        console.log(cache);
     }, [searchParam]);
 
     return (
@@ -62,7 +61,7 @@ const Search = () => {
                     setOpen(false);
                 }
             }}
-            className="relative"
+            className="relative w-full sm:w-fit"
         >
             <span className="sr-only">Search</span>
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
