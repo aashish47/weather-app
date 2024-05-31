@@ -6,7 +6,8 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
     const res = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
             unit === "c" ? "celsius" : "fahrenheit"
-        }&timezone=auto`
+        }&timezone=auto`,
+        { next: { revalidate: 3600 } }
     );
     if (!res.ok) {
         throw new Error("Weather response failed");
