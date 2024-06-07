@@ -47,10 +47,14 @@ export interface Weather {
     hourly_units: {
         time: string;
         temperature_2m: string;
+        weather_code: String;
+        is_day: string;
     };
     hourly: {
         time: string[];
         temperature_2m: number[];
+        weather_code: string;
+        is_day: number;
     };
     daily_units: {
         time: string;
