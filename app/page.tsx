@@ -23,7 +23,7 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 location={location}
                 temp={temp}
                 unit={tempUnit}
-                time={format(time, "dd-MMMM-yyyy p")}
+                time={format(time, "dd-MMM-yyyy p")}
                 isDay={is_day}
                 weatherCode={weather_code}
             />

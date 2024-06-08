@@ -25,8 +25,8 @@ export default JSON.parse(`{
     "2": {
         "description": "Partly Cloudy",
         "image": {
-            "0": "/partly_cloudy_day.png",
-            "1": "/partly_cloudy_night.png"
+            "1": "/partly_cloudy_day.png",
+            "0": "/partly_cloudy_night.png"
         }
     },
     "3": {
@@ -88,22 +88,22 @@ export default JSON.parse(`{
     "61": {
         "description": "Slight Rain",
         "image": {
-            "1": "/cloudy_with_rain.png",
-            "0": "/cloudy_with_rain.png"
+            "1": "/scattered_showers_day.png",
+            "0": "/scattered_showers_night.png"
         }
     },
     "63": {
         "description": "Moderate Rain",
         "image": {
-            "1": "/scattered_showers_day.png",
-            "0": "/scattered_showers_night.png"
+            "1": "/showers_rain.png",
+            "0": "/showers_rain.png"
         }
     },
     "65": {
         "description": "Heavy Intensity Rain",
         "image": {
-            "1": "/showers_rain.png",
-            "0": "/showers_rain.png"
+            "1": "/heavy_rain.png",
+            "0": "/heavy_rain.png"
         }
     },
     "66": {
@@ -123,15 +123,15 @@ export default JSON.parse(`{
     "71": {
         "description": "Slight Snow",
         "image": {
-            "1": "/cloudy_with_snow.png",
-            "0": "/cloudy_with_snow.png"
+            "1": "/flurries.png",
+            "0": "/flurries.png"
         }
     },
     "73": {
         "description": "Moderate Snow",
         "image": {
-            "1": "/flurries.png",
-            "0": "/flurries.png"
+            "1": "/showers_snow.png",
+            "0": "/showers_snow.png"
         }
     },
     "75": {
@@ -151,15 +151,15 @@ export default JSON.parse(`{
     "80": {
         "description": "Slight Rain Showers",
         "image": {
-            "1": "/scattered_showers_day.png",
-            "0": "/scattered_showers_night.png"
+            "1": "/showers_rain.png",
+            "0": "/showers_rain.png"
         }
     },
     "81": {
         "description": "Moderate Showers",
         "image": {
-            "1": "/scattered_showers_day.png",
-            "0": "/scattered_showers_night.png"
+            "1": "/heavy_rain.png",
+            "0": "/heavy_rain.png"
         }
     },
     "82": {
@@ -201,8 +201,8 @@ export default JSON.parse(`{
     "99": {
         "description": "Thunderstorm With Heavy Hail",
         "image": {
-            "1": "/isolated_thunderstorms.png",
-            "0": "/isolated_thunderstorms.png"
+            "1": "/strong_thunderstorms.svg",
+            "0": "/strong_thunderstorms.svg"
         }
     }
-}`);
+}`) as WeatherCodeData;
