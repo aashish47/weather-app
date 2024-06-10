@@ -8,35 +8,25 @@ interface TemperatureNavbarProps {
     location: string;
     temp: number;
     unit: string;
-    time: string;
     isDay: number;
     weatherCode: number;
 }
 
-const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location, temp, unit, time, isDay, weatherCode }) => {
+const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location, temp, unit, isDay, weatherCode }) => {
     return (
-        <div className="w-full sticky top-0 px-2 py-1 bg-gradient-to-b from-slate-900 flex justify-between items-center ">
-            <div className="flex gap-2 items-center">
-                <HomeModernIcon className="w-10 self-end" />
-                <div className="flex flex-col text-nowrap max-w-[155px] sm:max-w-fit">
-                    <div className="flex gap-2 items-center">
-                        <p className="text-lg capitalize overflow-hidden text-ellipsis sm:overflow-visible">{location}</p>
-                        <p>{`${temp}${unit}`}</p>
-                    </div>
-                    <p className="font-light text-sm">{time}</p>
-                </div>
-                <div className="group relative hover:cursor-pointer ">
-                    <Image
-                        alt="weather icon"
-                        src={weatherCodeData[weatherCode].image[isDay]}
-                        width={48}
-                        height={48}
-                    />
-                    <div className="hidden group-hover:block px-2 py-1 bg-black font-light text-sm absolute text-nowrap rounded-md top-full right-0">
-                        {weatherCodeData[weatherCode].description}{" "}
-                    </div>
-                </div>
+        <div className="w-full sticky top-0 px-2 py-1 bg-gradient-to-b from-slate-900 flex justify-between items-center gap-1 ">
+            <div className="flex gap-1 text-sm text-nowrap min-w-[200px]">
+                <HomeModernIcon className="w-5 shrink-0" />
+                <p className="capitalize overflow-hidden text-ellipsis mr-2">{location}</p>
+                <Image
+                    alt="weather icon"
+                    src={weatherCodeData[weatherCode].image[isDay]}
+                    width={20}
+                    height={20}
+                />
+                <p>{`${temp}${unit}`}</p>
             </div>
+
             <Suspense>
                 <UnitSelector />
             </Suspense>
