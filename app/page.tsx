@@ -1,22 +1,39 @@
 import Current from "@/components/Current";
 import TemperatureNavbar from "@/components/navbar/temperature";
+import { Aqi } from "@/types/Aqi";
 import { Weather } from "@/types/Weather";
 import { format } from "date-fns";
 
 const Home = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
     const { latitude = "28.6519", longitude = "77.2315", location = "delhi", unit = "c" } = searchParams;
-    const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
+    let resForecast = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,surface_pressure,wind_speed_10m,visibility,dew_point_2m&hourly=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
             unit === "c" ? "celsius" : "fahrenheit"
         }&timezone=auto`,
         { next: { revalidate: 900 } }
     );
-    if (!res.ok) {
+    if (!resForecast.ok) {
         throw new Error("Weather response failed");
     }
-    const { current, current_units }: Weather = await res.json();
-    const { temperature_2m: temp, time, is_day, weather_code, apparent_temperature } = current;
+    const resAqi = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}&longitude=${longitude}&current=us_aqi`, {
+        next: { revalidate: 3600 },
+    });
+    const { current, current_units }: Weather = await resForecast.json();
+    const {
+        temperature_2m: temp,
+        time,
+        is_day,
+        weather_code,
+        apparent_temperature,
+        relative_humidity_2m,
+        wind_speed_10m,
+        surface_pressure,
+        visibility,
+        dew_point_2m,
+    } = current;
     const { temperature_2m: tempUnit } = current_units;
+    const { current: aqiData }: Aqi = await resAqi.json();
+    const { us_aqi: aqi } = aqiData;
 
     return (
         <div>
@@ -27,7 +44,7 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 isDay={is_day}
                 weatherCode={weather_code}
             />
-            <div className="overflow-auto h-[calc(100vh-96px)] mx-auto max-w-screen-md px-2">
+            <div className="overflow-auto h-[calc(100vh-96px)] mx-auto max-w-screen-md px-2 py-8">
                 <Current
                     temp={temp}
                     unit={tempUnit}
@@ -35,6 +52,12 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
                     isDay={is_day}
                     weatherCode={weather_code}
                     feelsLike={apparent_temperature}
+                    aqi={aqi}
+                    humidity={relative_humidity_2m}
+                    wind={wind_speed_10m}
+                    pressure={surface_pressure}
+                    visibility={visibility}
+                    dewPoint={dew_point_2m}
                 />
             </div>
         </div>
