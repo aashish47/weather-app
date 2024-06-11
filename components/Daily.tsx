@@ -25,6 +25,7 @@ const Daily: React.FC<DailyProps> = ({ max, min, weatherCode, unit, time }) => {
                                 src={weatherCodeData[weatherCode[index]].image[1]}
                                 width={42}
                                 height={42}
+                                className="h-[42px] w-[42px]"
                             />
                             <div className="flex flex-col gap-2">
                                 <h4>{`${maxTemp}${unit}`}</h4>

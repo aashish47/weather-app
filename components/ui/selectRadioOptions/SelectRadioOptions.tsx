@@ -20,7 +20,7 @@ const SelectRadioOptions: React.FC<SelectRadioOptionsProp> = ({ selected, labels
                 }
             }}
         >
-            <button className=" bg-white bg-opacity-10 rounded-md text-xl w-12 h-10 px-1 flex gap-1 justify-between items-center capitalize">
+            <button className="card px-1 text-xl w-12 h-10 flex gap-1 justify-between items-center capitalize">
                 {`°${selected}`}
                 {open ? <ChevronUpIcon width={12} /> : <ChevronDownIcon width={12} />}
             </button>

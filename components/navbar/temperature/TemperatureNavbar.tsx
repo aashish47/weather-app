@@ -14,7 +14,7 @@ interface TemperatureNavbarProps {
 
 const TemperatureNavbar: React.FC<TemperatureNavbarProps> = ({ location, temp, unit, isDay, weatherCode }) => {
     return (
-        <div className="w-full sticky top-0 px-2 py-1 bg-gradient-to-b from-slate-900 flex justify-between items-center gap-1 ">
+        <div className="w-full sticky top-0 px-2 py-1 flex justify-between items-center gap-1 ">
             <div className="flex gap-1 text-sm text-nowrap min-w-[200px]">
                 <HomeModernIcon className="w-5 shrink-0" />
                 <p className="capitalize overflow-hidden text-ellipsis mr-2">{location}</p>
