@@ -1,4 +1,5 @@
-import Current from "@/components/Current";
+import Daily from "@/components/Daily";
+import Current from "@/components/current";
 import TemperatureNavbar from "@/components/navbar/temperature";
 import { Aqi } from "@/types/Aqi";
 import { Weather } from "@/types/Weather";
@@ -7,7 +8,7 @@ import { format } from "date-fns";
 const Home = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
     const { latitude = "28.6519", longitude = "77.2315", location = "delhi", unit = "c" } = searchParams;
     let resForecast = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,surface_pressure,wind_speed_10m,visibility,dew_point_2m&hourly=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=${
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,is_day,weather_code,apparent_temperature,relative_humidity_2m,surface_pressure,wind_speed_10m,visibility,dew_point_2m&hourly=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=14&temperature_unit=${
             unit === "c" ? "celsius" : "fahrenheit"
         }&timezone=auto`,
         { next: { revalidate: 900 } }
@@ -18,7 +19,7 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
     const resAqi = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}&longitude=${longitude}&current=us_aqi`, {
         next: { revalidate: 3600 },
     });
-    const { current, current_units }: Weather = await resForecast.json();
+    const { current, current_units, daily }: Weather = await resForecast.json();
     const {
         temperature_2m: temp,
         time,
@@ -32,6 +33,7 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
         dew_point_2m,
     } = current;
     const { temperature_2m: tempUnit } = current_units;
+    const { temperature_2m_max: max, temperature_2m_min: min, weather_code: dailyWeatherCode, time: dailyTime } = daily;
     const { current: aqiData }: Aqi = await resAqi.json();
     const { us_aqi: aqi } = aqiData;
 
@@ -58,6 +60,13 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
                     pressure={surface_pressure}
                     visibility={visibility}
                     dewPoint={dew_point_2m}
+                />
+                <Daily
+                    max={max}
+                    min={min}
+                    weatherCode={dailyWeatherCode}
+                    unit={tempUnit}
+                    time={dailyTime.map((time) => format(time, "eee d"))}
                 />
             </div>
         </div>

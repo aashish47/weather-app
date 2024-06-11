@@ -37,10 +37,10 @@ const CurrentDetails: React.FC<CurrentDetailsProps> = ({ aqi, wind, humidity, vi
                     key={key}
                     className="flex flex-col grow "
                 >
-                    <div className="capitalize font-extralight text-xs">{key}</div>
+                    <h6 className="capitalize font-extralight text-xs">{key}</h6>
                     <div className="flex items-center gap-1">
                         {key === "air quality" && <div className={`${aqiColor[color]} w-2.5 h-2.5 rounded-full`} />}
-                        {value}
+                        <h4>{value}</h4>
                     </div>
                 </div>
             ))}

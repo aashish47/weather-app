@@ -1,5 +1,4 @@
-import CurrentDetails from "@/components/CurrentDetails";
-import { getAQIData } from "@/utils/getAqiData";
+import CurrentDetails from "@/components/current/CurrentDetails";
 import weatherCodeData from "@/utils/weatherCodeData";
 import Image from "next/image";
 
@@ -19,22 +18,13 @@ interface CurrentProps {
 }
 
 const Current: React.FC<CurrentProps> = ({ temp, unit, isDay, time, weatherCode, feelsLike, aqi, humidity, wind, pressure, visibility, dewPoint }) => {
-    const { color, level } = getAQIData(aqi);
-    const aqiColor: { [key: string]: string } = {
-        "Green": "bg-green-500",
-        "Yellow": "bg-yellow-500",
-        "Orange": "bg-orange-500",
-        "Red": "bg-red-500",
-        "Purple": "bg-purple-950",
-        "Maroon": "bg-rose-950",
-    };
     return (
-        <div className="w-full bg-black bg-opacity-20 rounded-md p-2 md:p-4 flex flex-col gap-8">
+        <div className="w-full card flex flex-col gap-8">
             <div>
-                <p className="font-medium capitalize text-sm">current weather</p>
-                <p className="font-extralight text-xs">{time}</p>
+                <h5 className="font-medium capitalize">current weather</h5>
+                <h6 className="font-extralight">{time}</h6>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 md:gap-10 items-center">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-10 items-center">
                 <div className="flex gap-1 items-center shrink-0">
                     <Image
                         alt="weather icon"
@@ -48,10 +38,10 @@ const Current: React.FC<CurrentProps> = ({ temp, unit, isDay, time, weatherCode,
                     </div>
                 </div>
                 <div className="flex flex-col">
-                    <div className="text-lg sm:text-xl font-medium text-center sm:text-left">{weatherCodeData[weatherCode].description}</div>
-                    <div className="flex justify-center sm:justify-start text-sm gap-4">
-                        <div className="capitalize font-extralight">feels like</div>
-                        <div>{`${feelsLike}${unit}`}</div>
+                    <h2 className="font-medium text-center sm:text-left">{weatherCodeData[weatherCode].description}</h2>
+                    <div className="flex justify-center sm:justify-start gap-4">
+                        <h5 className="capitalize font-extralight">feels like</h5>
+                        <h5>{`${feelsLike}${unit}`}</h5>
                     </div>
                 </div>
             </div>

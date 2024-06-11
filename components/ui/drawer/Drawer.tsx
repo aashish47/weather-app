@@ -53,8 +53,12 @@ const Drawer: React.FC<DrawerProps> = ({ children }) => {
                 <Bars3Icon />
             </button>
             <div className="flex h-[calc(100vh-48px)]">
-                <div className={`shrink-0 bg-neutral-900 flex flex-col justify-between ${open ? "w-full sm:w-64 transition-all" : "w-12 transition-all"} `}>
-                    <div className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] overflow-y-auto">
+                <div
+                    className={`shrink-0 bg-neutral-900 flex flex-col justify-between ${
+                        open ? "w-full sm:w-64 transition-all" : "w-0 sm:w-12 transition-all"
+                    } `}
+                >
+                    <div className="scrollbar-hidden overflow-y-auto">
                         <DrawerButtons buttons={buttons} />
                     </div>
                     <div className="border-t border-neutral-600 ">
