@@ -77,7 +77,7 @@ const Home = async ({ searchParams }: { searchParams: { [key: string]: string | 
                         weatherCode={hourlyWeatherCode}
                         time={hourlyTime.map((time) => format(time, "h a"))}
                         isDay={hourlyIsDay}
-                        unit={unit}
+                        unit={tempUnit}
                     />
                 </div>
             </div>
