@@ -4,10 +4,10 @@
 
 @layer base {
     body {
-        @apply bg-gradient-to-t from-blue-900 via-blue-950 to-slate-800 text-neutral-200;
+        @apply bg-gradient-to-tl from-blue-900 via-blue-950 to-slate-900 text-neutral-200;
     }
     ::-webkit-scrollbar {
-        @apply h-0.5 w-0.5 sm:h-2.5 sm:w-2.5;
+        @apply h-0.5 w-0.5 md:h-2.5 md:w-2.5;
     }
 
     ::-webkit-scrollbar-thumb {

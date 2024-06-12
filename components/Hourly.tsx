@@ -82,7 +82,7 @@ const Hourly: React.FC<HourlyProps> = ({ temp, weatherCode, time, isDay, unit })
                             label={{
                                 content: ({ value, x, y, index }: any) => {
                                     const { weatherCode, isDay } = data[index];
-                                    const showLabel = index % 4 === 1;
+                                    const showLabel = index % 8 === 3;
                                     return showLabel ? (
                                         <g>
                                             <text
@@ -95,7 +95,7 @@ const Hourly: React.FC<HourlyProps> = ({ temp, weatherCode, time, isDay, unit })
                                             </text>
                                             <image
                                                 href={weatherCodeData[weatherCode].image[isDay]}
-                                                x={x - 25}
+                                                x={x - 20}
                                                 y={y - 30}
                                                 width={20}
                                                 height={20}
