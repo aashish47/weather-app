@@ -13,7 +13,7 @@ const Search = () => {
     const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const searchParam = searchParams.get("search") ?? "";
+    const searchParam = searchParams.get("search");
     const [locations, setLocations] = useState<Geolocation[]>([]);
     const [open, setOpen] = useState(false);
     const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | undefined>(undefined);
@@ -28,7 +28,12 @@ const Search = () => {
     };
 
     const searchLocations = (search: string) => {
-        router.push(pathname + "?" + createQueryString("search", search, searchParams));
+        const link = `${pathname}?${createQueryString("search", search, searchParams)}`;
+        if (searchParam || searchParam === "") {
+            router.replace(link);
+        } else {
+            router.push(link);
+        }
     };
 
     useEffect(() => {
@@ -49,7 +54,12 @@ const Search = () => {
                 }
             }
         };
-        search();
+        if (searchParam) {
+            search();
+        } else {
+            setLocations([]);
+            setOpen(false);
+        }
     }, [searchParam]);
 
     return (

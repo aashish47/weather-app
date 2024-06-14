@@ -22,6 +22,7 @@ const Dropdown: React.FC<DropdownProps> = ({ locations }) => {
                             href={`?latitude=${latitude}&longitude=${longitude}&unit=${unit}&location=${name}`}
                             key={id}
                             className="py-2 px-3 border-t last:rounded-b-md border-neutral-600 hover:bg-neutral-700 active:bg-neutral-600 flex gap-2 items-center"
+                            replace
                         >
                             <Image
                                 alt="country flag"
